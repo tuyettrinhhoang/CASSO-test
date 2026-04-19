@@ -51,14 +51,14 @@ Lệnh hữu ích:
     this.bot.command('menu', async (ctx) => {
       const userId = ctx.from.id.toString();
       const response = await chatController.processMessage(userId, 'Cho tôi xem menu đầy đủ');
-      ctx.reply(response.response);
+      ctx.reply(response.response || response.message);
     });
 
     // Cart command
     this.bot.command('cart', async (ctx) => {
       const userId = ctx.from.id.toString();
       const response = await chatController.processMessage(userId, 'Xem giỏ hàng của tôi');
-      ctx.reply(response.response);
+      ctx.reply(response.response || response.message);
     });
 
     // Reset command
@@ -86,7 +86,7 @@ Lệnh hữu ích:
         const result = await chatController.processMessage(userId, userMessage);
 
         // Send response
-        await ctx.reply(result.response);
+        await ctx.reply(result.response || result.message);
 
       } catch (err) {
         console.error('Error handling message:', err);
